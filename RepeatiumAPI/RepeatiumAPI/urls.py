@@ -20,7 +20,6 @@ from rest_framework.authtoken import views as tv
 from quickstart import views
 
 router = routers.DefaultRouter()
-router.register(r'packages', views.PackageViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
@@ -30,5 +29,6 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^token', tv.obtain_auth_token),
-    url(r'^plist', views.PackageListAPIView.as_view(), name="list"),
+    url(r'^api/v1/plans/$', views.PlanListAPIView.as_view(), name="list"),
+    url(r'^api/v1/plans/(?P<pk>\d+)/$', views.PlanDetailAPIView.as_view(), name="detail"),
 ]
